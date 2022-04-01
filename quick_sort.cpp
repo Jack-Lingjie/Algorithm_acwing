@@ -1,21 +1,18 @@
 #include<iostream>
-#include<algorithm>
-#include<iterator>
 using namespace std;
-void quicksort(int q[],int l,int r)//快速排序
+void quicksort(int q[],int left,int right)
 {
-    if(l>=r) return;
-    int i=l-1,j=r+1,x=q[(l+r)/2];
+    if(left>=right) return;
+    int i=left-1,j=right+1,x=q[(left+right)/2];
     while(i<j)
     {
         while(q[++i]<x);
-        while(q[--j]>x) ;
+        while(q[--j]>x);
         if(j>i) swap(q[i],q[j]);
     }
-    quicksort(q,l,j);
-    quicksort(q,j+1,r);
+    quicksort(q,left,j);
+    quicksort(q,j+1,right);
 }
-
 int main()
 {
     int n;
@@ -30,5 +27,5 @@ int main()
     {
         cout<<a[i]<<" ";
     }
-    return 0;
+    cout<<endl;
 }
