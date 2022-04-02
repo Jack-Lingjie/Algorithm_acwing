@@ -1,6 +1,4 @@
-    // cout<<"sum:"<<sum<<"left"<<left<<"right"<<right<<endl;
-    // for(int i=left;i<right-left+1;i++)
+    // for(int i=left;i<=right;i++)
     // {
-    //     cout<<q[i]<<" ";
+    //     cout<<" q:"<<q[i]<<" ";
     // }
-    // cout<<endl;
