@@ -1,4 +1,2 @@
-    // for(int i=left;i<=right;i++)
-    // {
-    //     cout<<" q:"<<q[i]<<" ";
-    // }
+    // for(auto &t:C) cout<<t;
+    // cout<<endl;
