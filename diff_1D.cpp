@@ -11,7 +11,6 @@ int main()
     int n,m;
     cin>>n>>m;
     vector<int> arr1(n+1);
-    vector<int> arr2(n+2);
     for(int i=1;i<=n;i++)
     {
         int x;
@@ -25,7 +24,7 @@ int main()
         insert(arr1,l,r,c);
     }
     int sum=0;
-    for(int i=0;i<n;i++)
+    for(int i=1;i<=n;i++)
     {
         sum+=arr1[i];
         cout<<sum<<" ";
