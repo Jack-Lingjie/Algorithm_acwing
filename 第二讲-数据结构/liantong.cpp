@@ -1,53 +1,47 @@
 #include<iostream>
-#include<vector>
 using namespace std;
-struct Node{
-    int x;
-    int number=1;
-};
-int find(int x,vector<Node> &p)
+const int N=100010;
+int p[N],cnt[N];
+int find(int x)
 {
-    if(x!=p[x].x) p[x].x=find(p[x].x,p);
-    return p[x].x;
+    if(x!=p[x]) p[x]=find(p[x]);
+    return p[x];
 }
 
 int main()
 {
     int n,m;
     cin>>n>>m;
-    vector<Node> parent(n+1);
     for(int i=1;i<=n;i++)
     {
-        parent[i].x=i;
-        parent[i].number=1;
+        p[i]=i;
+        cnt[i]=1;
     }
+    string s;
+    int a,b;
+
     for(int i=0;i<m;i++)
     {
-        string op;
-        cin>>op;
-        if(op=="C")
+        cin>>s;
+        if(s=="C")//插入
         {
-            int a,b;
             cin>>a>>b;
-            if(a==b) continue;
-            if(find(a,parent)== find(b,parent)) continue;
-            parent[find(b,parent)].number+=parent[find(a,parent)].number;
-            parent[find(a,parent)].x=find(b,parent);
+            if(find(a)==find(b)) continue;
+            else{
+                cnt[find(b)]+=cnt[find(a)];
+                p[find(a)]=find(b);
 
-        }
-        else if(op=="Q1")
+            }
+        }else if(s=="Q1")
         {
-            int a,b;
             cin>>a>>b;
-            if(find(a,parent)==find(b,parent)) cout<<"Yes"<<endl;//在同一个块
+
+            if(find(a)==find(b)) cout<<"Yes"<<endl;
             else cout<<"No"<<endl;
         }else{
-            int c;
-            cin>>c;
-            int p= find(c,parent);//找到父亲
-            cout<<parent[p].number<<endl;
+            cin>>a;
+            cout<<cnt[find(a)]<<endl;
         }
     }
     return 0;
 }
-
