@@ -1,4 +1,5 @@
-     for(int j=head;j!=-1;j=ne[j])
-    {
-        cout<<e[j]<<" ";
-    }
+			// if (!op.empty()&&op.top()!='(' && prior[op.top()] >= prior[s[i]]) 
+			// {
+				
+			// 	eval();
+			// }

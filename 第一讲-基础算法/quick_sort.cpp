@@ -1,31 +1,34 @@
 #include<iostream>
 using namespace std;
-void quicksort(int q[],int left,int right)
+const int N=100010;
+int arr[N];
+int n;
+void quick_sort(int l,int r)
 {
-    if(left>=right) return;
-    int i=left-1,j=right+1,x=q[(left+right)/2];
-    while(i<j)
+    if(l>=r) return ;
+    int i=l-1,j=r+1;
+    int mid=arr[(l+r)/2];
+    while(j>i)
     {
-        while(q[++i]<x);
-        while(q[--j]>x);
-        if(j>i) swap(q[i],q[j]);
+        while(arr[++i]<mid);
+        while(arr[--j]>mid);
+        if(j>i) swap(arr[i],arr[j]);
     }
-    quicksort(q,left,j);
-    quicksort(q,j+1,right);
+    quick_sort(l,j);
+    quick_sort(j+1,r);
 }
 int main()
 {
-    int n;
+
     cin>>n;
-    int *a=new int[n];
     for(int i=0;i<n;i++)
     {
-        cin>>a[i];
+        cin>>arr[i];
     }
-    quicksort(a,0,n-1);
+    quick_sort(0,n-1);
     for(int i=0;i<n;i++)
     {
-        cout<<a[i]<<" ";
+        cout<<arr[i]<<" ";
     }
-    cout<<endl;
+    return 0;
 }

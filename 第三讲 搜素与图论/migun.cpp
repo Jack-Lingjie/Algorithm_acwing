@@ -1,40 +1,43 @@
 #include<iostream>
-#include<queue>
+
+//844走迷宫
 using namespace std;
-const int N = 100;
-int graph[N][N], visit[N][N];
-int main()
+const int N=110;
+int graph[N][N],hh=0,tt=-1,st[N][N],layer[N][N];
+int n,m;
+pair<int,int> queue[N*N];
+void bfs()
 {
-	int n, m;
-	cin >> n >> m;
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++)
+	queue[++tt]=make_pair(1,1);
+	int dx[]{-1,1,0,0};
+	int dy[]{0,0,-1,1};
+	st[0][0]=1;
+	int sum=0;
+	while(hh<=tt)//队列不为空
+	{
+		auto loc=queue[hh++];
+		int x,y;
+		x=loc.first;
+		y=loc.second;
+		for(int i=0;i<4;i++)
 		{
-			cin >> graph[i][j];
-			visit[i][j] = -1;
-		}
-
-	queue<pair<int, int>> q;
-	q.push({ 0,0 });
-	int x[4] = { 0,0,-1,1 }, y[4] = { -1,1,0,0 };//移动数组
-	visit[0][0] = 0;
-	while (!q.empty()) {//q不为0时
-
-		auto now = q.front();
-		q.pop();
-		for (int i = 0; i <= 3; i++)
-		{
-			int xx = now.first + x[i];
-			int yy = now.second + y[i];
-			//cout << "xx:" << xx << " yy:" << yy << endl;
-			if (xx >= 0 && xx < n && yy >= 0 && yy < m&&graph[xx][yy]==0&&visit[xx][yy]==-1)//是0，且未被访问过
+			if(x+dx[i]>=1&&x+dx[i]<=n&&y+dy[i]>=1&&y+dy[i]<=m&&graph[x+dx[i]][y+dy[i]]==0&&st[x+dx[i]][y+dy[i]]==0)
 			{
-				q.push({ xx,yy });
-				visit[xx][yy] = visit[now.first][now.second] + 1;
+				queue[++tt]=make_pair(x+dx[i],y+dy[i]);
+				st[x+dx[i]][y+dy[i]]=1;
+				layer[x+dx[i]][y+dy[i]]=layer[x][y]+1;
 			}
 		}
+		// sum++;
 	}
-
-	cout << visit[n-1][m-1] << endl;
+	cout<<layer[n][m]<<endl;
+}
+int main()
+{
+	cin>>n>>m;
+	for(int i=1;i<=n;i++)
+	for(int j=1;j<=m;j++)
+		cin>>graph[i][j];
+	bfs();
 	return 0;
 }
